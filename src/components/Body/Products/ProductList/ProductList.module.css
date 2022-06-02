@@ -1,0 +1,33 @@
+.productCards {
+   margin: 20px 0 0 0;
+   border-top: 1px solid #111;
+   padding: 20px 10px;
+}
+
+.filters {}
+
+
+/* Products */
+
+
+.productItem {
+   display: flex;
+   flex-direction: column;
+   margin: 0 0 20px 0;
+   border: 1px solid #111;
+   border-radius: 20px;
+   overflow: hidden;
+   padding: 20px;
+   font-weight: 700;
+}
+
+.name {
+   margin: 0 0 20px 0;
+   text-align: center;
+}
+
+.infoName {
+   margin: 0 20px 0 0;
+}
+
+.infoValue {}

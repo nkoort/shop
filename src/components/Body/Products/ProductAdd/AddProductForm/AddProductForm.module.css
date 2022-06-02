@@ -1,0 +1,17 @@
+.formInpets{
+   display: flex;
+   flex-direction: column;
+}
+
+.inputSection {
+   display: grid;
+   grid-template-columns: 1fr 4fr;
+   margin: 0 0 10px 0;
+}
+.inputSectionName{
+   color: #fff;
+   margin: 0 20px 0 0;
+}
+.inputSectionField *{
+   width: 100%;
+}

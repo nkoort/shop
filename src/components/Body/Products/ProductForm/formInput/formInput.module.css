@@ -1,0 +1,90 @@
+.block {
+   display: grid;
+   grid-template-columns: 2fr 5fr;
+   max-width: 700px;
+   padding: 10px 20px;
+}
+
+.nameBlock,
+.inputBlock {
+   background-color: #fff;
+   font-weight: 600;
+   font-size: 16px;
+   border-radius: 10px;
+}
+
+.nameBlock {
+   margin: 0 20px 0 0;
+   padding: 10px;
+   border-radius: 10px;
+
+}
+
+.inputBlock {
+   position: relative;
+}
+
+.input {
+   width: 100%;
+   font-weight: 600;
+   font-size: 16px;
+   padding: 10px;
+   border-radius: 10px;
+}
+
+.generate {
+   position: absolute;
+   top: 50%;
+   transform: translate(0%, -50%);
+   right: 1%;
+   cursor: pointer;
+}
+
+.error {
+   position: absolute;
+   bottom: -45px;
+   padding: 10px;
+   left: 20px;
+   border-radius: 10px;
+   background-color: rgb(224, 62, 62);
+   color: rgb(0, 0, 0);
+   font-size: 12px;
+   z-index: 99;
+}
+
+.error::after {
+   content: '';
+   clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+   background-color: rgb(224, 62, 62);
+   width: 10px;
+   height: 10px;
+   position: absolute;
+   top: -10px;
+   right: 50%;
+   transform: translate(50%, 0%);
+}
+
+.select {
+   width: 100%;
+   font-weight: 600;
+   font-size: 16px;
+   border-radius: 10px;
+   padding: 10px;
+}
+
+.buttons {
+   display: flex;
+}
+
+.editLogo,
+.deletLogo {
+   max-width: 25px;
+   height: auto;
+   object-fit: cover;
+   background-color: none;
+   margin: 0 0px 0 10px;
+}
+
+.value {
+   display: flex;
+}
