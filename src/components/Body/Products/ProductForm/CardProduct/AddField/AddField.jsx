@@ -22,7 +22,7 @@ const AddField = (props) => {
       // },
       onSubmit: values => {
          // debugger;
-         let idProduct = props.product.id;
+         let idProduct = props.product.main.id;
          props.addNewField(idProduct, values.name, values.value);
          formik.resetForm({ name: '', value: '' });
          statusChange(true);

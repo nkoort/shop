@@ -1,15 +1,7 @@
-body {
-   min-height: 100vh;
-   /* margin: 20px; */
-   margin: 0;
-   position: relative;
-
-}
-
 .wrapper {
    display: grid;
    grid-template-columns: 1fr;
-   grid-template-rows: auto 1fr auto;
+   grid-template-rows: auto 0.999999999fr auto;
    height: 100%;
    background: rgba(128, 128, 128, 0.646);
 }
@@ -19,7 +11,7 @@ body {
 }
 
 .body {
-   height: 100%;
+   /* height: 100%; */
    grid-row: 2/3;
 
 }
@@ -28,10 +20,10 @@ body {
    grid-row: 3/4
 }
 
-.preloader {
+/* .preloader {
    position: absolute;
-   top: 0;
-   left: 0;
+   top: -20px;
+   left: -20px;
    width: 100%;
    height: 100%;
    background-color: rgba(0, 0, 0, 0.5);
@@ -44,4 +36,4 @@ body {
    max-width: calc(0.1 * 90vw);
    height: auto;
    object-fit: cover;
-}
+} */

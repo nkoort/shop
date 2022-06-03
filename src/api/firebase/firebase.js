@@ -103,11 +103,11 @@ export const changeAPI = {
   },
   async updateDocument(idProduct, newField) {
     const ref = doc(db, 'products', idProduct)
-    let data = newField
     await updateDoc(ref, newField)
   },
   async delField(idProduct, fieldName) {
     const ref = doc(db, 'products', idProduct)
+    debugger
     await updateDoc(ref, {
       [fieldName]: deleteField(),
     })

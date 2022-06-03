@@ -45,29 +45,39 @@ export const ProductCardInputs = ({ formik, meta }) => {
    const logoEdit = 'https://w7.pngwing.com/pngs/766/581/png-transparent-computer-icons-editing-others.png';
    const logoDelete = 'https://www.freeiconspng.com/thumbs/remove-icon-png/delete-dust-bin-erase-eraser-remove-icon-1.png';
    const { handleChange, values } = formik;
-   const { product, id, keyName, updateField, deleteField } = meta;
+   const { product, id, keyName, updateField, deleteField, containter } = meta;
    let [editMode, modeChange] = useState(true);
    const editModeV = () => {
       editMode ? modeChange(false) : modeChange(true);
    }
    const changeBlur = () => {
-      let data = formik.values
+      let data = formik.values[containter]
+      debugger;
       let a = Object.keys(data)
       let b = data;
-      updateField(data.id, data);
+      updateField(id, data, containter);
    }
 
+   // debugger
    return (
       <div className={s.block}>
          <div className={s.name}>
             <div>{keyName}</div>
          </div>
          <div className={s.value}>
-            <input onBlur={changeBlur} onChange={handleChange} autoFocus={true} type="text" name={keyName} value={values[keyName]} disabled={editMode} />
+            <input
+               onBlur={changeBlur}
+               onChange={handleChange}
+               autoFocus={true}
+               type="text"
+               name={containter + '.' + keyName}
+               id={containter + '.' + keyName}
+               value={values[containter][keyName]}
+               disabled={editMode} />
             {keyName !== 'id' &&
                <div className={s.buttons}>
                   <img className={s.editLogo} onClick={editModeV} src={logoEdit} alt="" />
-                  <img className={s.deletLogo} onClick={() => deleteField(id, keyName, product)} src={logoDelete} alt="" />
+                  {containter !== 'main' && <img className={s.deletLogo} onClick={() => deleteField(id, keyName, values, containter)} src={logoDelete} />}
                </div>
             }
          </div>

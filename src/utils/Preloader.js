@@ -1,4 +1,4 @@
-import s from '../App.module.css'
+import s from '../components/Body/Body.module.scss'
 
 const preloadreLogo =
   'https://static.wixstatic.com/media/5a0bfe_dbd71c8c517c4d74a259ca710f1b7438~mv2.gif'

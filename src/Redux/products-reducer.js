@@ -16,9 +16,7 @@ const ADD_PRODUCT_NEW = 'products/ADD_PRODUCT_NEW'
 const ADD_PRODUCT_NEW_FIELD = 'products/ADD_PRODUCT_NEW_FIELD'
 
 let initialState = {
-  products: {
-    id: {},
-  },
+  products: [{}],
   thisProduct: [{}],
   loadingStatus: false,
 }
@@ -56,7 +54,10 @@ const productsReducer = (state = initialState, action) => {
         thisProduct: [
           {
             ...state.thisProduct[0],
-            [action.newFieldName]: action.newFieldValue,
+            info: {
+              ...state.thisProduct[0].info,
+              [action.newFieldName]: action.newFieldValue,
+            },
           },
         ],
       }
@@ -130,27 +131,38 @@ const addNewFieldAC = (newFieldName, newFieldValue) => ({
 })
 
 export const addNewProductTH = (product, id) => async (dispatch) => {
+  let productMain = { main: product, info: '' }
+  debugger
   if (!id) {
     dispatch(addNewProductAC(product))
   } else {
-    await productsAPI.postProduct(db, product, id)
-    dispatch(addNewProductAC(product))
+    await productsAPI.postProduct(db, productMain, id)
+    dispatch(addNewProductAC(productMain))
   }
 }
+
 export const addNewFieldTH = (idProduct, newFieldName, newFieldValue) => async (
   dispatch,
 ) => {
-  let newField = { [newFieldName]: newFieldValue }
+  debugger
+  let newField = {
+    ['info.' + newFieldName]: newFieldValue,
+  }
   await changeAPI.updateDocument(idProduct, newField)
   dispatch(addNewFieldAC(newFieldName, newFieldValue))
 }
-export const updateDocTH = (idProduct, fields) => async (dispatch) => {
-  await changeAPI.updateDocument(idProduct, fields)
-}
-export const deleteFieldTH = (idProduct, deleteField, productObj) => async (
+
+export const updateDocTH = (idProduct, fields, containter) => async (
   dispatch,
 ) => {
-  await changeAPI.delField(idProduct, deleteField)
+  await changeAPI.updateDocument(idProduct, { [containter]: fields })
+}
+export const deleteFieldTH = (idProduct, deleteField, containter) => async (
+  dispatch,
+) => {
+  let field = [containter] + '.' + [deleteField]
+  debugger
+  await changeAPI.delField(idProduct, field)
 }
 
 export default productsReducer

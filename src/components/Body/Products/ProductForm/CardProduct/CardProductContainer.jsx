@@ -45,31 +45,44 @@ const CardProduct = ({ product, updateField, deleteField, addNewProduct }) => {
    }, [product]);
 
 
-   const delField = (id, keyName, newProduct) => {
+   const delField = (id, keyName, newProduct, container) => {
+      debugger;
       !del ? delChange(true) : delChange(false);
-      deleteField(id, keyName, newProduct)
-      delete newProduct[keyName]
+      deleteField(id, keyName, container)
+      let a = [newProduct] + '.' + [container] + '.' + [keyName]
+      delete newProduct[container][keyName]
       addNewProduct(newProduct)
 
    }
+
    const formik = useFormik({
       initialValues: {
-         id: product.id,
-         name: product.name,
-         category: product.category,
+         main: {
+            id: product.main.id,
+            name: product.main.name,
+            category: product.main.category,
+         },
+         info: {
+            onherFields: '',
+         }
+
       },
       // validate: values => {
       // },
       onSubmit: values => {
       },
    });
-   let productField = Object.keys(formik.values).map(key => <ProductCardInputs key={key} formik={formik} meta={{ product: product, keyName: key, id: product.id, updateField: updateField, deleteField: delField, }} />)
+   // debugger;
+   let productFieldMain = Object.keys(formik.values.main).map(key => <ProductCardInputs key={key} formik={formik} meta={{ containter: 'main', product: product.main, keyName: key, id: product.main.id, updateField: updateField, deleteField: delField, }} />)
+   let productFieldOther = Object.keys(formik.values.info).map(key => <ProductCardInputs containter={'info'} key={key} formik={formik} meta={{ containter: 'info', product: product.info, keyName: key, id: product.main.id, updateField: updateField, deleteField: delField, }} />)
    return (
       <div className={s.form}>
 
          <form onSubmit={formik.handleSubmit}>
-            {productField}
-
+            <div>MAIN INFO</div>
+            {productFieldMain}
+            <div>OTHER INFO</div>
+            {productFieldOther}
             <div className={s.saveButton}>
                <button type="submit">Save</button>
             </div>
