@@ -4,6 +4,7 @@
    grid-template-rows: auto 0.999999999fr auto;
    height: 100%;
    background: rgba(128, 128, 128, 0.646);
+   overflow: auto;
 }
 
 .header {

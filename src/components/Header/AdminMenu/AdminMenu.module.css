@@ -1,38 +1,42 @@
-.adminMenuBlock{
+.adminMenuBlock {
    padding: 0 20px 0 0;
    position: relative;
 }
 
-.menuLink:hover{
+.menuLink:hover {
    text-decoration: underline;
    cursor: pointer;
 }
-.adminMenu{
+
+.adminMenu {
    width: 200px;
    height: 200px;
    background-color: brown;
    position: absolute;
    top: 20px;
-   right: 10px;
+   left: -10px;
    display: flex;
    flex-direction: column;
    padding: 10px;
    z-index: 2;
 }
+
 .adminMenu a {
    cursor: pointer;
    margin: 0 0 10px 0;
-   
+
 }
+
 .adminMenu a:hover {
    text-decoration: underline;
 }
+
 .shadowBlock {
-   position: absolute;
-   height: 10000px;
-   width: 10000px;
+   position: fixed;
+   height: calc(100% + 500px);
+   width: 100%;
    background-color: rgba(0, 0, 0, 0.5);
    top: -50px;
-   right: 0;
+   left: -20px;
    z-index: 1;
 }
