@@ -6,6 +6,7 @@ import {
   getFirestore,
   collection,
   getDocs,
+  getDoc,
   doc,
   addDoc,
   query,
@@ -41,12 +42,10 @@ export const productsAPI = {
     let productsList = products.docs.map((doc) => doc.data())
     return productsList
   },
-  async getProduct(base, id) {
-    const proudctRef = collection(db, 'products')
-    const q = query(proudctRef, where('id', '==', id))
-    const docProduct = await getDocs(q)
-    const product = docProduct.docs.map((doc) => doc.data())
-    return product
+  async getProduct(id) {
+    const proudctRef = doc(db, 'products', id)
+    const docProduct = await getDoc(proudctRef)
+    return docProduct.data()
   },
   async postProduct(base, data, id) {
     setDoc(doc(base, 'products', id), data)
@@ -61,7 +60,6 @@ export const authAPI = {
   login(email, password) {
     const auth = getAuth()
     let user = signInWithEmailAndPassword(auth, email, password)
-    //  debugger
     return user
   },
   logout() {
@@ -107,7 +105,6 @@ export const changeAPI = {
   },
   async delField(idProduct, fieldName) {
     const ref = doc(db, 'products', idProduct)
-    debugger
     await updateDoc(ref, {
       [fieldName]: deleteField(),
     })

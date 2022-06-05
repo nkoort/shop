@@ -36,7 +36,7 @@ const productsReducer = (state = initialState, action) => {
     case GET_PRODUCT:
       return {
         ...state,
-        thisProduct: action.product,
+        thisProduct: [action.product],
       }
     case STATUS_LOADING:
       return {
@@ -109,7 +109,7 @@ export const getProductTH = (id) => async (dispatch) => {
   if (id === 'kill') {
     dispatch(getPoductAC([{}]))
   } else {
-    let response = await productsAPI.getProduct(db, id)
+    let response = await productsAPI.getProduct(id)
     dispatch(statusAC(false))
     dispatch(getPoductAC(response))
     if (response) {
@@ -132,7 +132,6 @@ const addNewFieldAC = (newFieldName, newFieldValue) => ({
 
 export const addNewProductTH = (product, id) => async (dispatch) => {
   let productMain = { main: product, info: '' }
-  debugger
   if (!id) {
     dispatch(addNewProductAC(product))
   } else {
@@ -144,7 +143,6 @@ export const addNewProductTH = (product, id) => async (dispatch) => {
 export const addNewFieldTH = (idProduct, newFieldName, newFieldValue) => async (
   dispatch,
 ) => {
-  debugger
   let newField = {
     ['info.' + newFieldName]: newFieldValue,
   }
@@ -161,7 +159,6 @@ export const deleteFieldTH = (idProduct, deleteField, containter) => async (
   dispatch,
 ) => {
   let field = [containter] + '.' + [deleteField]
-  debugger
   await changeAPI.delField(idProduct, field)
 }
 

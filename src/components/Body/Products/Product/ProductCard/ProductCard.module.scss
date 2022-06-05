@@ -1,0 +1,107 @@
+.productItem {
+   display: flex;
+   flex-direction: column;
+   margin: 0 0 20px 0;
+   border: 1px solid #111;
+   border-radius: 20px;
+   overflow: hidden;
+   padding: 20px;
+   font-weight: 700;
+}
+
+.name {
+   text-align: center;
+   font-size: 24px;
+   display: flex;
+   justify-content: center;
+   position: relative;
+
+   .edit {
+      display: none;
+      position: absolute;
+      right: 0;
+
+      &>a img {
+         max-width: 20px;
+         height: 20px;
+         object-fit: cover;
+      }
+   }
+
+   &:hover .edit {
+      display: block;
+   }
+
+}
+
+
+.blockName {
+   font-size: 20px;
+   margin: 10px 0 10px 30px;
+}
+
+.block {
+   display: flex;
+   flex-direction: column;
+}
+
+.main {
+   order: 1;
+
+   .main {
+      display: flex;
+      flex-direction: column;
+
+      .idLine {
+         order: 1;
+         color: green;
+      }
+
+      .nameLine {
+         order: 2;
+         color: red;
+      }
+
+      .categoryLine {
+         order: 3;
+         color: blue;
+      }
+   }
+}
+
+.other {
+   order: 2;
+}
+
+
+
+
+
+.infoLine {
+   display: grid;
+   grid-template-columns: 1fr 2fr;
+   grid-template-rows: auto;
+   margin: 15px 0;
+   padding: 5px 0;
+   position: relative;
+}
+
+.lineName {
+   display: flex;
+   align-items: flex-start;
+   flex-direction: column;
+   padding: 0px 5px;
+   white-space: nowrap;
+}
+
+.lineName::after {
+   content: '';
+   height: 1px;
+   width: 100%;
+   border-bottom: 1px dotted #111;
+}
+
+.lineValue {
+   display: flex;
+   align-items: center;
+}
