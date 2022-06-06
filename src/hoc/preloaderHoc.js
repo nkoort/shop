@@ -11,13 +11,11 @@ let mapStateToProps = (state) => ({
 const preloadHoc = (Component) => {
   const PreloadHoc = (props) => {
     useEffect(() => {
-      debugger
       props.getProducts()
     }, [])
     if (props.products[0].hasOwnProperty('main')) {
       return <Component {...props} />
     } else {
-      debugger
       return <PreloaderBig />
     }
   }

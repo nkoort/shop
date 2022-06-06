@@ -4,11 +4,11 @@ import ButtonAddContainer from '../../buttonAdd/buttonAddContainer';
 import classNames from 'classnames/bind';
 import editPng from '../../../../../assets/img/edit.png';
 
+
 let cx = classNames.bind(s);
 
 const ProductCard = ({ product }) => {
    let match = useMatch('/product-list/product/:idProduct');
-
 
    const descrProduct = () => {
       return (
@@ -35,6 +35,9 @@ const ProductCard = ({ product }) => {
          })
       )
    }
+
+
+
    return (
       <div className={s.productItem}>
          <div className={s.name}>
@@ -46,7 +49,7 @@ const ProductCard = ({ product }) => {
             {descrProduct()}
          </div>
          <div>
-            <ButtonAddContainer />
+            <ButtonAddContainer product={product.main} />
          </div>
       </div>
    )

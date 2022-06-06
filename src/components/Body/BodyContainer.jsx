@@ -10,7 +10,7 @@ import ProductListContainer from "./Products/ProductList/ProductListContainer";
 import ProductContainer from "./Products/Product/ProductContainer";
 import LoginContainer from "./Login/LoginContainer";
 import ProductFormContainer from "./Products/ProductForm/ProductFormContainer";
-import BucketContainer from "./Bucket/BucketContainer";
+import CartContainer from "./Cart/CartContainer";
 
 const BodyContainer = (props) => {
 
@@ -26,7 +26,7 @@ const BodyContainer = (props) => {
             <Route path="/product-list" element={<ProductListContainer />} />
             <Route path="/product-list/product/*" element={<ProductContainer />} />
             <Route path="/editproduct/*" element={<ProductFormContainer />} />
-            <Route path="/bucket" element={<BucketContainer />} />
+            <Route path="/bucket" element={<CartContainer />} />
          </Routes>
       </div>
    )

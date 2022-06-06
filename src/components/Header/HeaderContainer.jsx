@@ -6,7 +6,7 @@ import { compose } from 'redux';
 // import Header from './Header';
 import MainMenu from './MainMenu/MainMenu';
 import AdminMenu from './AdminMenu/AdminMenu';
-import BucketMenu from './BucketMenu/BucketMenu';
+import CartMenu from './CartMenu/CartMenu';
 
 
 
@@ -32,7 +32,7 @@ const Header = (props) => {
    return (
       <div className={s.header}>
          <AdminMenu isAuth={props.isAuth} />
-         <BucketMenu />
+         <CartMenu />
       </div>
 
    );

@@ -6,6 +6,7 @@ import { getProductTH } from "../../../../Redux/products-reducer";
 import { getProdSelector } from "../../../../Redux/Selectors/productsSelector";
 import ProductCard from "./ProductCard/ProductCard";
 import PreloaderBig from "../../../../utils/Preloader";
+import { addToCartTH } from "../../../../Redux/cart-reducer";
 
 const ProductContainer = (props) => {
    const [status, statusChange] = useState(false);
@@ -15,12 +16,12 @@ const ProductContainer = (props) => {
       let id = match.params.idProduct;
       props.getProduct(id);
    }, [])
-
+   // debugger
 
    if (props.product.hasOwnProperty('main')) {
       return (
          <div>
-            <ProductCard product={props.product} />
+            <ProductCard product={props.product} addToCart={props.addToCart} />
          </div>
       )
    } else {
@@ -34,6 +35,6 @@ const ProductContainer = (props) => {
 let mapStateToProps = (state) => ({
    product: getProdSelector(state)
 })
-export default compose(connect(mapStateToProps, { getProduct: getProductTH }),)(ProductContainer);
+export default compose(connect(mapStateToProps, { getProduct: getProductTH, addToCart: addToCartTH }),)(ProductContainer);
 
 

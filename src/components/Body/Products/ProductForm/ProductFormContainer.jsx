@@ -52,16 +52,11 @@ const ProductAddDoc = (props) => {
          formik.setValues({ id: idNew })
       }
    }
-   // if (match === null) {
-   //    statusChange('get');
-   //    if (status != 'add') {
-   //       statusChange('get');
-   //    };
-   // };
+
    useEffect(() => {
       idProdF()
       if (match != null) {
-         // debugger;
+
          props.getProduct(match.params.productID)
          statusChange('preloader');
          setTimeout(() => {
@@ -75,6 +70,7 @@ const ProductAddDoc = (props) => {
          id: '',
          name: '',
          category: '',
+         price: '',
       },
       validate: values => {
          let f = formik.errors;
@@ -110,6 +106,7 @@ const ProductAddDoc = (props) => {
                   <InputControl formik={formik} meta={{ blockName: 'ID продукта', element: 'input', type: 'text', id: 'id', disabled: true }} />
                   <InputControl formik={formik} meta={{ blockName: 'Название продукта', element: 'input', type: 'text', id: 'name' }} />
                   <InputControl formik={formik} meta={{ blockName: 'Категория', element: 'select', option: optionObj, id: 'category' }} />
+                  <InputControl formik={formik} meta={{ blockName: 'Цена', element: 'input', id: 'price' }} />
                   <button type="submit">Submit</button>
                </form>
             </div>

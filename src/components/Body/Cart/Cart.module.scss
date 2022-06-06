@@ -1,0 +1,69 @@
+.cartBlock {
+   display: grid;
+   gap: 10px;
+
+   .item {
+      display: grid;
+      grid-template-columns: 1fr 0.5fr 0.3fr;
+      align-items: center;
+      width: 100%;
+      border: 1px solid #111;
+      border-radius: 20px;
+      overflow: hidden;
+
+
+      .info {
+         display: grid;
+         grid-template-columns: 0.5fr 1fr;
+         grid-template-rows: 1fr 1fr 1fr;
+         gap: 5px;
+         padding: 5px 15px;
+
+         .infoName {
+            grid-column: 1/2;
+         }
+
+         .infoValue {
+            grid-column: 2/3;
+         }
+      }
+
+      .button {
+         background-color: green;
+         height: 100%;
+         width: 100%;
+      }
+
+      .summBlock {
+         display: grid;
+         justify-items: center;
+         align-items: center;
+         gap: 10px;
+
+         .summTitle {
+            font-weight: 600;
+         }
+
+         .summValue {
+            font-size: 14px;
+         }
+      }
+   }
+}
+
+.cartTotal {
+   display: flex;
+   justify-content: flex-end;
+   align-items: center;
+   margin: 20px 20px 0 0;
+   font-size: 18px;
+   font-weight: 700;
+
+   .cartTotalTitle {
+      margin: 0 10px 0 0;
+   }
+
+   .cartTotalValue {
+      text-decoration: underline;
+   }
+}

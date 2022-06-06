@@ -16,9 +16,12 @@ const ContentContainer = (props) => {
       let category = formData.category ? formData.category : 'Phone';
       filterChange(category)
    }
-
+   // debugger;
    let cards = Object.keys(props.products).map(p => {
-      return <ProductCard key={props.products[p].main.id} product={props.products[p]} />
+      let id = props.products[p].main.id
+      return <ProductCard
+         key={id}
+         product={props.products[p]} />
    })
 
    return (
@@ -36,7 +39,8 @@ const ContentContainer = (props) => {
    )
 }
 let mapStateToProps = (state) => ({
-   products: getProductsSelector(state)
+   products: getProductsSelector(state),
+   cart: state.cart
 })
 export default compose(
    connect(mapStateToProps, { getProducts: getProductsTH }),

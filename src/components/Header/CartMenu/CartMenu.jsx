@@ -1,28 +1,27 @@
 
-import s from './BucketMenu.module.css';
+import s from './CartMenu.module.css';
 
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
-import BucketContainer from '../../Body/Bucket/BucketContainer';
 
 
-const BucketMenuContainer = (props) => {
+const CartMenuContainer = (props) => {
    return (
       <div>
-         <BucketMenu />
+         <CartMenu />
       </div>
    )
 }
 let mapStateToProps = (state) => ({})
 export default compose(connect(mapStateToProps,
    {}),
-)(BucketMenuContainer);
+)(CartMenuContainer);
 
 
-const BucketMenu = (props) => {
+const CartMenu = (props) => {
 
    return (
       <div>
