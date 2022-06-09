@@ -6,7 +6,6 @@ import BodyContainer from './components/Body/BodyContainer'
 import Footer from './components/Footer/Footer'
 import s from './App.module.css'
 import { examAuthTH } from './Redux/auth-reducer'
-import './index.scss'
 
 const App = (props) => {
   useEffect(() => {

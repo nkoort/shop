@@ -15,6 +15,7 @@ import CartContainer from "./Cart/CartContainer";
 const BodyContainer = (props) => {
 
 
+
    return (
       <div className={s.bodyContainer}>
          <Routes>
