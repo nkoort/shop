@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import { authAPI } from "../../../api/firebase/firebase";
 import { authTH, logOutTH } from "../../../Redux/auth-reducer";
+import { getProfileInfo, getProfileMain } from "../../../Redux/Selectors/authSelector";
 import PreloaderBig from "../../../utils/Preloader";
 import Login from "./Login";
 import s from './Login.module.css';
@@ -21,17 +23,9 @@ const LoginContainer = (props) => {
    };
 
 
-   <div className={s.login}>
-      <div>
-         Profile: {props.profile.uid}
-         <div>
-            Email: {props.profile.email}
-         </div>
-         <button onClick={click}>
-            Log Out
-         </button>
-      </div>
-   </div>
+   const addName = (name) => {
+      authAPI.updateProfile('Some directory')
+   }
 
 
    if (props.isAuth === false && status === true) {
@@ -49,6 +43,13 @@ const LoginContainer = (props) => {
                Profile: {props.profile.uid}
                <div>
                   Email: {props.profile.email}
+
+               </div>
+               <div>
+                  Name: {props.profile.displayName}
+               </div>
+               <div>
+                  <button onClick={addName}>add new name</button>
                </div>
                <button onClick={click}>
                   Log Out
@@ -65,7 +66,7 @@ const LoginContainer = (props) => {
 
 
 let mapStateToProps = (state) => ({
-   profile: state.auth.auth,
+   profile: getProfileMain(state),
    isAuth: state.auth.isAuth,
 })
 export default compose(

@@ -42,10 +42,10 @@ const Cart = ({ cart }) => {
    useEffect(() => {
       summTotal()
    }, [cart])
-   debugger
+
 
    const cartItems = Object.keys(cart).map(key => {
-      if (cart[key].id !== 0) {
+      if (cart[key].count !== 0) {
          return (
             <div className={s.item}>
                <div className={s.info}>
@@ -66,7 +66,7 @@ const Cart = ({ cart }) => {
 
    })
 
-   if (Object.keys(cart).length == 0) {
+   if (total === 0) {
       return <div>Корзина пока пустая...</div>
    }
    return (

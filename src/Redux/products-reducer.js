@@ -7,6 +7,7 @@ import {
   postUser,
   productsAPI,
 } from '../api/firebase/firebase'
+import { isEmpty } from 'lodash'
 
 const ADD_PRODUCT = 'products/ADD_PRODUCT'
 const GET_PRODUCTS = 'products/GET_PRODUCTS'
@@ -90,9 +91,15 @@ const getProductAC = (products) => ({
   products,
 })
 
-export const getProductsTH = (limitSize) => async (dispatch) => {
-  let response = await productsAPI.getProducts(limitSize)
-  dispatch(getProductAC(response))
+export const getProductsTH = (filters = '', limitSize) => async (dispatch) => {
+  //   debugger
+  if (filters.category == '' || isEmpty(filters)) {
+    let response = await productsAPI.getProducts(limitSize)
+    dispatch(getProductAC(response))
+  } else if (!isEmpty(filters) && filters.category !== '') {
+    let res = await productsAPI.getProductsFilter(filters, limitSize)
+    dispatch(getProductAC(res))
+  }
 }
 
 //GET 1 PRODUCT FOR PRODUCT PAGE

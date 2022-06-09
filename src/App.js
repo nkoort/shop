@@ -5,14 +5,13 @@ import HeaderContainer from './components/Header/HeaderContainer'
 import BodyContainer from './components/Body/BodyContainer'
 import Footer from './components/Footer/Footer'
 import s from './App.module.css'
-import { authAPI } from './api/firebase/firebase'
 import { examAuthTH } from './Redux/auth-reducer'
 import './index.scss'
 
 const App = (props) => {
   useEffect(() => {
     props.examAuth()
-  })
+  }, [])
 
   return (
     <div className={s.wrapper}>
@@ -34,4 +33,6 @@ let mapStateToProps = (state) => ({
   isAuth: state.auth.isAuth,
 })
 
-export default connect(mapStateToProps, { examAuth: examAuthTH })(App)
+export default connect(mapStateToProps, {
+  examAuth: examAuthTH,
+})(App)

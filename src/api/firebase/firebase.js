@@ -20,7 +20,13 @@ import {
   serverTimestamp,
 } from 'firebase/firestore/lite'
 import { getAnalytics } from 'firebase/analytics'
-import { getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth'
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
+  updateProfile,
+} from 'firebase/auth'
 
 const firebaseConfig = {
   apiKey: 'AIzaSyD1wJsslwcN4D3e5k2AcGZRK0wCTyPVtKI',
@@ -35,12 +41,42 @@ const analytics = getAnalytics(app)
 export const db = getFirestore(app)
 
 export const productsAPI = {
-  async getProducts(limitSize = 10) {
+  async getProducts(filters, limitSize = 100) {
     const products = await getDocs(
-      query(collection(db, 'products'), limit(limitSize)),
+      query(collection(db, 'products'), limit(100)),
     )
     let productsList = products.docs.map((doc) => doc.data())
     return productsList
+  },
+  async getProductsFilter(filters, limitSize = 100) {
+    //  debugger
+    let itemsArr = []
+    const items = Object.keys(filters).map((key) => {
+      if (filters[key] != '') {
+        itemsArr.push(where('main.' + key, '==', filters[key]))
+      }
+    })
+    //  let filtersArr = []
+    //  const itemsLine = itemsArr.forEach((e) => {
+    //    filtersArr.push(e)
+    //  })
+    //  console.log(itemsArr)
+    //  console.log(filtersArr)
+
+    const q = query(collection(db, 'products'), ...itemsArr)
+    //  debugger
+    const querySnapshot = await getDocs(q)
+    let a = querySnapshot.docs.map((doc) => doc.data())
+    return a
+
+    ///рабочий код ниже
+    //  const q = query(
+    //    collection(db, 'products'),
+    //    where('main.category', '==', filters.category),
+    //  )
+    //  const querySnapshot = await getDocs(q)
+    //  let a = querySnapshot.docs.map((doc) => doc.data())
+    //  return a
   },
   async getProduct(id) {
     const proudctRef = doc(db, 'products', id)
@@ -55,6 +91,7 @@ export const productsAPI = {
 export const authAPI = {
   async examAuth() {
     const auth = getAuth()
+
     return auth
   },
   login(email, password) {
@@ -65,6 +102,15 @@ export const authAPI = {
   logout() {
     const auth = getAuth()
     signOut(auth)
+      .then(() => {})
+      .catch((error) => {})
+  },
+  updateProfile(name) {
+    const auth = getAuth()
+
+    updateProfile(auth.currentUser.reloadUserInfo, {
+      test: name,
+    })
       .then(() => {})
       .catch((error) => {})
   },
@@ -108,5 +154,29 @@ export const changeAPI = {
     await updateDoc(ref, {
       [fieldName]: deleteField(),
     })
+  },
+}
+
+export const cartAPI = {
+  async addToCart(data) {
+    let res = await authAPI.examAuth()
+    onAuthStateChanged(res, (user) => {
+      if (user) {
+        const ref = doc(db, 'carts', user.uid)
+        let field = { [data.id]: data }
+        if (data.count > 0) {
+          setDoc(ref, field, { merge: true })
+        } else {
+          updateDoc(ref, {
+            [data.id]: deleteField(),
+          })
+        }
+      }
+    })
+  },
+  async getCart(userId) {
+    const ref = doc(db, 'carts', userId)
+    const docProduct = await getDoc(ref)
+    return docProduct.data()
   },
 }
